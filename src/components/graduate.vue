@@ -62,7 +62,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .main_content {
   position: relative;
   margin-left: 245px;
@@ -74,6 +74,8 @@
   margin-left: -400px;
   width: 800px;
   height: 600px;
+  border: solid #E3670C 1px;
+  box-shadow: 0 0 8px #FBB448;
 }   
 @media screen and (max-width: 1060px) {
   #graduate {

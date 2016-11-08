@@ -6,21 +6,56 @@
   <transition>
     <router-view></router-view>
   </transition>
-  
+  <my-mask v-if="canlogin"></my-mask>
+  <my-login v-if="canlogin"></my-login>
 </div>
 </template>
 
 <script>
 import myHead from './components/header'
 import myNav from './components/nav'
+import myMask from './components/mask'
+import myLogin from './components/login'
 
 export default {
   name: 'app',
   components: {
     myHead,
-    myNav
-    // myContainer
+    myNav,
+    myMask,
+    myLogin
+  },
+  data() {
+    return {
+      canlogin: false
+    }
+  },
+  computed: {
+    canlogin() {
+      return this.$store.state.islogin
+    }
   }
+  // methods: {
+  //   toLogin(islogin) {
+  //     this.canlogin = islogin;
+  //   },
+  //   toQuit(isquit) {
+  //     this.canlogin = !isquit;
+  //   }
+  // },
+  // data() {
+  //   return {
+  //     canlogin: false
+  //   }
+  // },
+  // created() {
+  //   this.$on('to-login', this.toLogin)
+  //   this.$on('to-quit', this.toQuit)
+  // },
+  // beforeDestroy() {
+  //   this.$off('to-login', this.toLogin)
+  //   this.$off('to-quit', this.toQuit)
+  // }
 }
 </script>
 

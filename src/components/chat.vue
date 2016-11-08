@@ -83,7 +83,11 @@
           },
           xAxis: {
             type: 'category',
-            data: this.xnames,
+            data: this.names,
+            axisLabel: {
+              rotate: 60,
+              interval: 0
+            },
             splitArea: {
               show: true
             }
@@ -99,10 +103,10 @@
             min: 0,
             max: 100,
             calculable: true,
-            itemheight: 260,
+            itemheight: 300,
             orient: 'horizontal',
             left: 'center',
-            bottom: '5%'
+            bottom: '3%'
           },
           series: [
             {
@@ -209,14 +213,14 @@
     mounted() {
       // console.log(this.computeTotalSpeak(speaks))
       // console.log(speaks)
-      console.log(this.convertData(relations))
+      // console.log(this.convertData(relations))
       this.drawHeatMap('relation')
       this.drawLine('activetime')
     }
   }
 </script>
 
-<style>
+<style scoped>
 .main_content {
   position: relative;
   margin-left: 245px;
@@ -229,6 +233,7 @@
   margin-left: -400px;
   width: 800px;
   height: 900px;
+  box-shadow: 0 0 10px #EDE68A;
 } 
 #activetime {
   height: 600px;

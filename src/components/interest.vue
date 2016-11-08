@@ -135,7 +135,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .main_content {
   position: relative;
   margin-left: 245px;
@@ -148,6 +148,8 @@
   margin-left: -400px;
   width: 800px;
   height: 600px;
+  border: solid #00AD7C 1px;
+  box-shadow: 0 0 8px #52D681;
 }   
 #interestbar {
   margin-top: 30px;

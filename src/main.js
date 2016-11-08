@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 
 Vue.use(VueRouter)
+Vue.use(Vuex)
 // 定义路由组件
 const Worldcloud = require('./components/cloud.vue')
 const Building = require('./components/building.vue')
@@ -43,12 +45,27 @@ const router = new VueRouter({
   routes
 })
 
+const store = new Vuex.Store({
+  state: {
+    islogin: false
+  },
+  mutations: {
+    enableLogin(state) {
+      state.islogin = true
+    },
+    disableLogin(state) {
+      state.islogin = false
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   template: '<App/>',
   components: { App },
-  router: router
+  router,
+  store
 })
 
 

@@ -185,7 +185,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .main_content {
   position: relative;
   margin-left: 245px;
@@ -198,6 +198,8 @@
   margin-left: -400px;
   width: 800px;
   height: 600px;
+  border: solid #faf6f3 2px;
+  box-shadow: 0 0 10px #F7D098;
 }  
 #difficultbar {
   margin-top: 40px;

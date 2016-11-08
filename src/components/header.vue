@@ -7,13 +7,29 @@
       </ul>
     </div>
     <div class="topbar-info">
-      <a href="#">登录</a>
-      <span class="nav-separate">|</span>
-      <a href="#">注册</a>
+      <a href="#" v-on:click="toLogin">登录</a>
     </div>
   </div>
 </header>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        islogin: false
+      }
+    },
+    methods: {
+      toLogin() {
+        // this.islogin = true;
+        // // 给父组件传递信息
+        // this.$parent.$emit('to-login', { text: this.islogin})  
+        this.$store.commit('enableLogin')     
+      }
+    }
+  }
+</script>
 
 <style>
 * {

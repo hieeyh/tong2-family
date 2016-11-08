@@ -131,7 +131,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .main_content {
   position: relative;
   margin-left: 245px;
@@ -144,6 +144,7 @@
   margin-left: -400px;
   width: 800px;
   height: 600px;
+  box-shadow: 0 0 10px #BF382A;
 }  
 #getuppie {
   margin-top: 60px;

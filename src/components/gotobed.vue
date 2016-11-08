@@ -88,17 +88,50 @@
           ]
         })
       },
-      drawpie() {
-
+      drawpie(id) {
+        this.chart = echarts.init(document.getElementById(id))
+        this.chart.setOption({
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: this.time,
+          },
+          series: [
+            {
+              name: '人数',
+              type: 'pie',
+              selectedMode: 'single',
+              radius: '70%',
+              center: ['50%', '60%'],
+              data: this.numberData,
+              itemStyle: {
+                normal: {
+                  borderWidth: 0.5,
+                  borderColor: '#ffffff'
+                },
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffset: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        })
       }
     },
     mounted() {
       this.drawbar('gotobedbar')
+      this.drawpie('gotobedpie')
     }
   }
 </script>
 
-<style>
+<style scoped>
 .main_content {
   position: relative;
   margin-left: 245px;
@@ -111,6 +144,7 @@
   margin-left: -400px;
   width: 800px;
   height: 600px;
+  box-shadow: 0 0 10px #884EA2;
 }  
 #gotobedpie {
   margin-top: 60px;

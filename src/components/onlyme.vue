@@ -132,8 +132,10 @@
     },
     mounted() {
        // console.log(this.getId(qqs), activeTime[this.getId(qqs)])
-      console.log(this.computeMyTotalSpeak(activeTime, this.getId(qqs)))
-      this.drawLine('myactivetime')
+      // console.log(this.computeMyTotalSpeak(activeTime, this.getId(qqs)))
+      if(this.user.hasLogin) {
+        this.drawLine('myactivetime')
+      } 
     }
   }
 </script>
@@ -150,7 +152,6 @@
   margin-left: -400px;
   width: 800px;
   height: 600px;
-  box-shadow: 0 0 10px #EDE68A;
 } 
 @media screen and (max-width: 1060px) {
   #myactivetime {

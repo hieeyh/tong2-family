@@ -158,7 +158,7 @@
 }  
 #getuppie {
   margin-top: 60px;
-  margin-bottom: 40px;
+  margin-bottom: 70px;
 }
 @media screen and (max-width: 1060px) {
   #getupbar,

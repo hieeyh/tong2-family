@@ -162,7 +162,7 @@
 }   
 #interestbar {
   margin-top: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 70px;
 }
 @media screen and (max-width: 1060px) {
   #interestpie,

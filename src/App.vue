@@ -8,6 +8,7 @@
   </transition>
   <my-mask v-if="canlogin"></my-mask>
   <my-login v-if="canlogin"></my-login>
+  <my-foot></my-foot>
 </div>
 </template>
 
@@ -16,6 +17,7 @@ import myHead from './components/header'
 import myNav from './components/nav'
 import myMask from './components/mask'
 import myLogin from './components/login'
+import myFoot from './components/foot'
 
 export default {
   name: 'app',
@@ -23,7 +25,8 @@ export default {
     myHead,
     myNav,
     myMask,
-    myLogin
+    myLogin,
+    myFoot
   },
   data() {
     return {

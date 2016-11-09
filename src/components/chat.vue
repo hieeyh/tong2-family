@@ -246,7 +246,7 @@
 #activetime {
   height: 600px;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
 @media screen and (max-width: 1060px) {
   #relation,

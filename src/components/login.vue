@@ -49,6 +49,7 @@
         this.form.hasLogin = true
         this.disableLogin() 
         this.logIn(this.form)   
+        console.log(this.$store.state.user)
         this.$router.replace({path: '/'})
       }
     }

@@ -166,7 +166,7 @@
 }
 #word_cloud2 {
   margin-top: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 70px;
   height: 480px;
 }
 @media screen and (max-width: 1060px) {

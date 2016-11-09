@@ -24,7 +24,13 @@
       this.chart.setOption({
         title: {
           text: '寝室学习氛围情况调查',
-          left: 'center'
+          left: 'center',
+          top: 10,
+          textStyle: {
+            fontSize: 24,
+            fontFamily: 'Helvetica',
+            fontWeight: 400
+          }
         },
         tooltip: {
           trigger: 'item',
@@ -35,11 +41,13 @@
             saveAsImage: {},
             dataView: {}
           },
-          right: 15
+          right: 15,
+          top: 10
         },
         legend: {
             orient: 'vertical',
-            left: 'left',
+            left: 5,
+            top: 10,
             data: this.opinion,
         },
         series: [

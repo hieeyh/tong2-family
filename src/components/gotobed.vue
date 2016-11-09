@@ -29,19 +29,27 @@
         this.chart.setOption({
           title: {
             text: '工作日睡觉时间调查结果',
-            left: 'center'
+            left: 'center',
+            top: 10,
+            textStyle: {
+              fontSize: 24,
+              fontFamily: 'Helvetica',
+              fontWeight: 400
+            }
           },
           tooltip: {
             trigger: 'axis'
           },
           toolbox: {
             feature: {
-              saveAsImage: {},
-              dataView: {},
               magicType: {
                 type: ['line', 'bar']
-              }
-            }
+              },
+              saveAsImage: {},
+              dataView: {}             
+            },
+            right: 15,
+            top: 10
           },
           grid: {
             left: '3%',
@@ -97,7 +105,8 @@
           },
           legend: {
             orient: 'vertical',
-            left: 'left',
+            left: 5,
+            top: 10,
             data: this.time,
           },
           series: [

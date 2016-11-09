@@ -6,26 +6,43 @@
         <li class="nav">华科电信小范围调查结果展示平台</li>
       </ul>
     </div>
-    <div class="topbar-info">
-      <a href="#" v-on:click="toLogin">登录</a>
+    <div v-if="user.hasLogin" class="topbar-info">
+      <span>{{user.name}}欢迎你</span>
+      <span>|</span>
+      <button v-on:click="toLogout">登出</button>
+    </div>
+    <div v-else class="topbar-info">
+      <button v-on:click="toLogin">登录</button>
     </div>
   </div>
 </header>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+  // import { mapState } from 'vuex'
   export default {
     data() {
       return {
-        islogin: false
+        user: {}
+      }
+    },
+    computed: { 
+      user() {
+        return this.$store.state.user
       }
     },
     methods: {
+      ...mapActions(['enableLogin', 'logOut']),
       toLogin() {
         // this.islogin = true;
         // // 给父组件传递信息
         // this.$parent.$emit('to-login', { text: this.islogin})  
-        this.$store.commit('enableLogin')     
+        this.enableLogin()
+      },
+      toLogout() {
+        this.logOut()
+        this.$router.replace({path: '/'})
       }
     }
   }
@@ -64,11 +81,13 @@
   height: 60px;
   line-height: 60px;
 }
-.topbar-info a {
+button {
   color: #919191;
-  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  background-color: #fff;
 }
-.topbar-info a:hover {
+button:hover {
   color: #000;
 }
 .topbar-info span {

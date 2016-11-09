@@ -62,7 +62,8 @@
             saveAsImage: {},
             dataView: {}
           },
-          right: 15
+          right: 15,
+          top: 10
         },
         bmap: {
           center: [114.428545, 30.517984],

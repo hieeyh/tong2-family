@@ -1,0 +1,161 @@
+<template>
+  <div class="main_content">
+    <div id="myactivetime"></div>
+  </div>
+</template>
+
+<script>
+  import echarts from 'echarts'
+  import qqs from '../../data/index2QQ_id.json'
+  import activeTime from '../../data/dayVectors.json'
+
+  export default {
+    data() {
+      return {
+        user: {},
+        times: ['00:00', '00:30', '01:00', '01:30', '02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30']
+      }
+    },
+    computed: {
+      user() {
+        return this.$store.state.user
+      } 
+    },
+    methods: {
+      getId(object) {
+        for (var i in object) {
+          if(object[i] == this.user.qq) {
+            return i
+          }
+        }
+      },
+      computeMyTotalSpeak(arr, index) {
+        var mySpeakData = arr[index]
+        var result = new Array(48)
+        for (var i = 0; i < 48; i++) {
+          result[i] = 0;
+          for (var j = 0; j < 5; j++) {
+            result[i] += mySpeakData[5*i+j];
+          }
+        }
+        return result
+      },
+      drawLine(id) {
+        this.chart = echarts.init(document.getElementById(id))
+        this.chart.setOption({
+          title: {
+            text: '通信1502班班群平均每天不同时间段发言量分析',
+            left: 'center',
+            top: 10,
+            textStyle: {
+              fontSize: 22,
+              fontFamily: 'Helvetica',
+              fontWeight: 400
+            }
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {},
+              dataView: {}
+            },
+            left: 16,
+            top: 8
+          },
+          xAxis: {
+            data: this.times
+          },
+          yAxis: {
+            splitLine: {
+                show: false
+            }
+          },
+          dataZoom: [{
+            startValue: '00：00'
+          }, {
+            type: 'inside'
+          }],
+          visualMap: {
+            top: 10,
+            right: 10,
+            pieces: [{
+              gt: 0,
+              lte: 10,
+              color: '#096'
+            }, {
+              gt: 10,
+              lte: 20,
+              color: '#ffde33'
+            }, {
+              gt: 20,
+              lte: 30,
+              color: '#ff9933'
+            }, {
+              gt: 30,
+              lte: 40,
+              color: '#cc0033'
+            }, {
+              gt: 40,
+              lte: 70,
+              color: '#660099'
+            }, {
+              gt: 70,
+              color: '#7e0023'
+            }],
+            outOfRange: {
+              color: '#999'
+            }
+          },
+          series: {
+            name: '发言量',
+            type: 'line',
+            data: this.computeMyTotalSpeak(activeTime, this.getId(qqs)),
+            markLine: {
+              silent: true,
+              data: [{
+                yAxis: 10
+              }, {
+                yAxis: 20
+              }, {
+                yAxis: 30
+              }, {
+                yAxis: 40
+              }, {
+                yAxis: 70
+              }]
+            }
+          }
+        })
+      }
+    },
+    mounted() {
+       // console.log(this.getId(qqs), activeTime[this.getId(qqs)])
+      console.log(this.computeMyTotalSpeak(activeTime, this.getId(qqs)))
+      this.drawLine('myactivetime')
+    }
+  }
+</script>
+
+<style scoped>
+.main_content {
+  position: relative;
+  margin-left: 245px;
+  margin-top: 100px;
+}
+#myactivetime {
+  position: relative;
+  left: 50%;
+  margin-left: -400px;
+  width: 800px;
+  height: 600px;
+  box-shadow: 0 0 10px #EDE68A;
+} 
+@media screen and (max-width: 1060px) {
+  #myactivetime {
+    position: absolute;
+    left: 408px;
+  }
+}
+</style>

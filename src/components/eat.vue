@@ -20,17 +20,25 @@
       this.chart.setOption({
         title: {
           text: '每天在校吃饭花销',
-          left: 'center'
+          left: 'center',
+          top: 10,
+          textStyle: {
+            fontSize: 24,
+            fontFamily: 'Helvetica',
+            fontWeight: 400
+          }
         },
         tooltip: {
           trigger: 'axis'
         },
         toolbox: {
           feature: {
-            dataView: {show: true, readOnly: false},
             magicType:{show: true, type: ['line', 'bar']},
-            saveAsImage: {show: true}
-          }
+            saveAsImage: {show: true},
+            dataView: {show: true, readOnly: false}            
+          },
+          top: 10,
+          right: 15
         },
         calculable: true,
         grid: {

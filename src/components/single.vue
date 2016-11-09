@@ -23,7 +23,13 @@
       this.chart.setOption({
         title: {
           text: '是否单身调查结果',
-          left: 'center'
+          left: 'center',
+          top: 10,
+          textStyle: {
+            fontSize: 24,
+            fontFamily: 'Helvetica',
+            fontWeight: 400
+          }
         },
         tooltip: {
           trigger: 'item',
@@ -33,19 +39,22 @@
           feature: {
             saveAsImage: {},
             dataView: {}
-          }
+          },
+          right: 15,
+          top: 10
         },
         legend: {
             orient: 'vertical',
-            left: 'left',
+            left: 5,
+            top: 10,
             data: this.course,
         },
         series: [
           {
             name: '是否单身',
             type: 'pie',
-            radius: [60, 240],
-            center: ['50%', '60%'],
+            radius: [60, 220],
+            center: ['50%', '55%'],
             roseType: 'radius',
             data: this.courseDiff,
             itemStyle: {

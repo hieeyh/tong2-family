@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
-import Vuex from 'vuex'
-
-Vue.use(VueRouter)
-Vue.use(Vuex)
+import store from './store/store'
+// import Vuex from 'vuex'
+Vue.use(VueRouter) 
+// Vue.use(Vuex)
 // 定义路由组件
 const Worldcloud = require('./components/cloud.vue')
 const Building = require('./components/building.vue')
@@ -20,6 +20,7 @@ const Eat = require('./components/eat.vue')
 const Amuse = require('./components/amuse.vue')
 const Single = require('./components/single.vue')
 const Chat = require('./components/chat.vue')
+const Onlyme = require('./components/onlyme.vue')
 
 // 定义路由
 const routes = [
@@ -37,7 +38,8 @@ const routes = [
   { path: '/eat', component: Eat },
   { path: '/amuse', component: Amuse },
   { path: '/single', component: Single },
-  { path: '/chat', component: Chat }
+  { path: '/chat', component: Chat },
+  { path: '/onlyme', component: Onlyme }
 ]
 
 // 创建router实例
@@ -45,19 +47,19 @@ const router = new VueRouter({
   routes
 })
 
-const store = new Vuex.Store({
-  state: {
-    islogin: false
-  },
-  mutations: {
-    enableLogin(state) {
-      state.islogin = true
-    },
-    disableLogin(state) {
-      state.islogin = false
-    }
-  }
-})
+// const store = new Vuex.Store({
+//   state: {
+//     islogin: false
+//   },
+//   mutations: {
+//     enableLogin(state) {
+//       state.islogin = true
+//     },
+//     disableLogin(state) {
+//       state.islogin = false
+//     }
+//   }
+// })
 
 /* eslint-disable no-new */
 new Vue({

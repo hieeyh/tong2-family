@@ -1,6 +1,7 @@
 # family
 
 > the statistics about tong2 family
+不支持IE8及其以下版本
 
 ## Build Setup
 

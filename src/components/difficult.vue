@@ -31,7 +31,13 @@
         this.chart.setOption({
           title: {
             text: '电信大二上课程难度调查结果',
-            left: 'center'
+            left: 'center',
+            top: 10,
+            textStyle: {
+              fontSize: 24,
+              fontFamily: 'Helvetica',
+              fontWeight: 400
+            }
           },
           tooltip: {
             trigger: 'item',
@@ -42,11 +48,13 @@
               saveAsImage: {},
               dataView: {}
             },
-            right: 15
+            right: 15,
+            top: 10
           },
           legend: {
             orient: 'vertical',
-            left: 'left',
+            left: 5,
+            top: 15,
             data: this.course,
           },
           series: [
@@ -83,7 +91,8 @@
               saveAsImage: {},
               dataView: {}
             },
-            right: 15
+            right: 15,
+            top: 10
           },
           grid: {
             top: 65,

@@ -33,7 +33,13 @@
         this.chart.setOption({
           title: {
             text: '电信大二上学生最感兴趣课程调查结果',
-            left: 'center'
+            left: 'center',
+            top: 10,
+            textStyle: {
+              fontSize: 24,
+              fontFamily: 'Helvetica',
+              fontWeight: 400
+            }
           },
           tooltip: {
             trigger: 'item',
@@ -44,11 +50,13 @@
               saveAsImage: {},
               dataView: {}
             },
-            right: 15
+            right: 15,
+            top: 10
           },
           legend: {
               orient: 'vertical',
-              left: 'left',
+              left: 5,
+              top: 10,
               data: this.course,
           },
           calculable: true,
@@ -83,7 +91,8 @@
               saveAsImage: {},
               dataView: {}
             },
-            right: 15
+            right: 15,
+            top: 10
           },
           xAxis: {
             data: this.course,
@@ -147,7 +156,7 @@
   left: 50%;
   margin-left: -400px;
   width: 800px;
-  height: 600px;
+  height: 620px;
   border: solid #00AD7C 1px;
   box-shadow: 0 0 8px #52D681;
 }   

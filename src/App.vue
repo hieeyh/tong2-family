@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     canlogin() {
-      return this.$store.state.islogin
+      return this.$store.state.login.islogin
     }
   }
   // methods: {
@@ -67,7 +67,7 @@ a {
   text-decoration: none;
 }
 #app {
-  font-family: Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

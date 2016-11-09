@@ -39,7 +39,12 @@
         title: {
           text: '周末休闲娱乐方式调查',
           left: 'center',
-
+          top: 10,
+          textStyle: {
+            fontSize: 24,
+            fontFamily: 'Helvetica',
+            fontWeight: 400
+          }
         },
         tooltip: {
           trigger: 'item',
@@ -49,11 +54,14 @@
           feature: {
             saveAsImage: {},
             dataView: {}
-          }
+          },
+          right: 15,
+          top: 10
         },
         legend: {
             orient: 'vertical',
-            left: 'left',
+            left: 5,
+            top: 10,
             data: this.amuse,
         },
         series: [
@@ -218,7 +226,7 @@
   left: 50%;
   margin-left: -400px;
   width: 800px;
-  height: 600px;
+  height: 660px;
   box-shadow: 0 0 10px #a2b4ba
 }   
 @media screen and (max-width: 1060px) {

@@ -93,14 +93,16 @@
               fontFamily: 'Helvetica',
               fontWeight: 400
             },
-            left: 'center'
+            left: 'center',
+            top: 20
           },
           toolbox: {
             feature: {
               saveAsImage: {},
               dataView: {}
             },
-            right: 20
+            right: 20,
+            top: 20
           },
           series: [{
             type: 'wordCloud',
@@ -109,7 +111,7 @@
             // shape: 'pentagon',
             // shape: 'circle',
             left: 'center',
-            top: 0,
+            top: 30,
             width: '75%',
             height: '80%',
             right: null,
@@ -158,13 +160,14 @@
   left: 50%;
   margin-left: -400px;
   width: 800px;
-  height: 600px;
+  height: 560px;
   border: solid #9E579D 1px;
   box-shadow: 0 0 8px #FC85AE;
 }
 #word_cloud2 {
   margin-top: 15px;
   margin-bottom: 20px;
+  height: 480px;
 }
 @media screen and (max-width: 1060px) {
   #word_cloud1,

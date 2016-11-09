@@ -144,6 +144,14 @@
           tooltip: {
             trigger: 'axis'
           },
+          toolbox: {
+            feature: {
+              saveAsImage: {},
+              dataView: {}
+            },
+            left: 16,
+            top: 8
+          },
           xAxis: {
             data: this.times
           },

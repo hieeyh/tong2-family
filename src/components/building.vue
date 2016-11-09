@@ -82,7 +82,8 @@
             saveAsImage: {},
             dataView: {}
           },
-          right: 15
+          right: 15,
+          top: 10
         },
         bmap: {
           // 百度地图中心经纬度

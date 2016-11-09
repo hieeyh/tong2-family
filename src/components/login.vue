@@ -36,7 +36,7 @@
       }
     },
     methods: {
-      ...mapActions(['disableLogin', 'logIn']),
+      ...mapActions(['disableLogin', 'logIn', 'loginSuccess']),
       toQuit() {
         // this.isquit = true;
         // this.$parent.$emit('to-quit', { text: this.isquit})
@@ -48,8 +48,8 @@
         if(!this.form.qq || !this.form.name) return
         this.form.hasLogin = true
         this.disableLogin() 
-        this.logIn(this.form)   
-        console.log(this.$store.state.user)
+        this.logIn(this.form)
+        this.loginSuccess()  
         this.$router.replace({path: '/'})
       }
     }
@@ -60,10 +60,10 @@
 #login {
   position:fixed;
   width: 420px;
-  height: 250px;
+  height: 260px;
   z-index:1000; 
   margin-left: -210px; 
-  margin-top: -125px;
+  margin-top: -130px;
   left: 50%;
   top: 50%;
   background-color: #fff;
@@ -87,15 +87,17 @@ h3 {
   display: block;
   width: 360px;
   height: 35px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-size: 15px;
 }
 .warn {
   color: red;
+  font-size: 12px;
+  margin-bottom:10px;
 }
 .button {
     margin-left: 268px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 button {
   width: 58px;

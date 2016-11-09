@@ -6,7 +6,7 @@
         <li class="nav">华科电信小范围调查结果展示平台</li>
       </ul>
     </div>
-    <div v-if="user.hasLogin" class="topbar-info">
+    <div v-if="hasLogin" class="topbar-info">
       <span>{{user.name}}欢迎你</span>
       <span>|</span>
       <button v-on:click="toLogout">登出</button>
@@ -24,16 +24,20 @@
   export default {
     data() {
       return {
-        user: {}
+        user: {},
+        hasLogin: this.$store.state.user.hasLogin
       }
     },
     computed: { 
+      hasLogin() {
+        return this.$store.state.login.hasLogin ? this.$store.state.login.hasLogin : this.$store.state.user.hasLogin
+      },
       user() {
         return this.$store.state.user
       }
     },
     methods: {
-      ...mapActions(['enableLogin', 'logOut']),
+      ...mapActions(['enableLogin', 'logOut', 'loginFail']),
       toLogin() {
         // this.islogin = true;
         // // 给父组件传递信息
@@ -42,6 +46,7 @@
       },
       toLogout() {
         this.logOut()
+        this.loginFail()
         this.$router.replace({path: '/'})
       }
     }

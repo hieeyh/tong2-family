@@ -60,10 +60,10 @@
 #login {
   position:fixed;
   width: 420px;
-  height: 260px;
+  height: 270px;
   z-index:1000; 
   margin-left: -210px; 
-  margin-top: -130px;
+  margin-top: -135px;
   left: 50%;
   top: 50%;
   background-color: #fff;
@@ -97,7 +97,7 @@ h3 {
 }
 .button {
     margin-left: 268px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 button {
   width: 58px;

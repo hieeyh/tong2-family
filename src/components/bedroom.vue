@@ -96,6 +96,7 @@
   position: relative;
   left: 50%;
   margin-left: -400px;
+  margin-bottom: 70px;
   width: 800px;
   height: 600px;
   border: solid #D01257 1px;

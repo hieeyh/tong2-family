@@ -225,6 +225,7 @@
   position: relative;
   left: 50%;
   margin-left: -400px;
+  margin-bottom: 70px;
   width: 800px;
   height: 660px;
   box-shadow: 0 0 10px #a2b4ba

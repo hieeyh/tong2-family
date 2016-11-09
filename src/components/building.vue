@@ -167,6 +167,7 @@
   position: relative;
   left: 50%;
   margin-left: -400px;
+  margin-bottom: 70px;
   width: 800px;
   height: 600px;
   box-shadow: 0 0 10px #A6E3E9;

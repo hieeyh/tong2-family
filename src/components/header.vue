@@ -9,7 +9,7 @@
     <div v-if="hasLogin" class="topbar-info">
       <span>{{user.name}}欢迎你</span>
       <span>|</span>
-      <button v-on:click="toLogout">登出</button>
+      <button v-on:click="toLogout">退出</button>
     </div>
     <div v-else class="topbar-info">
       <button v-on:click="toLogin">登录</button>

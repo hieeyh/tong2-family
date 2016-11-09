@@ -253,7 +253,7 @@
   #activetime {
     position: absolute;
     left: 408px;
-  },
+  }
   #activetime {
     top: 930px;
   }

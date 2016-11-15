@@ -76,14 +76,11 @@
           { name: '羡慕', value: 12 },
           { name: '我去', value: 12 },
           { name: '啧啧啧', value: 12 }
-        ],
-        option: {
-          
-        }
+        ]
       }
     },
     methods: {
-      setOptions (id, title, myshape) {
+      drawCloud (id, title, myshape) {
         this.chart = echarts.init(document.getElementById(id))
         this.chart.setOption({
           title: {
@@ -143,8 +140,11 @@
       }
     },
     mounted() {
-      this.setOptions('word_cloud1',this.title, 'cardioid')
-      this.setOptions('word_cloud2','', 'pentagon')
+      // 保证this.$el已经插入文档
+      this.$nextTick(function() {
+        this.drawCloud('word_cloud1', this.title, 'cardioid')
+        this.drawCloud('word_cloud2','', 'pentagon')
+      })
     }
   }
 </script>
@@ -163,20 +163,21 @@
   height: 560px;
   border: solid #9E579D 1px;
   box-shadow: 0 0 8px #FC85AE;
+  border-radius: 10px;
 }
 #word_cloud2 {
   margin-top: 15px;
   margin-bottom: 70px;
   height: 480px;
 }
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #word_cloud1,
   #word_cloud2 {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
   #word_cloud2 {
-    top: 610px;
+    top: 562px;
   }
 }
 </style>

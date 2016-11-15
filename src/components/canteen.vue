@@ -51,98 +51,103 @@
           }
         }
           return res
+      },
+      drawMap (id) {
+        this.chart = echarts.init(document.getElementById(id))
+        this.chart.setOption({
+          title: {
+            text: '学生最喜爱学生食堂分布',
+            left: 'center',
+            top: 15,
+            textStyle: {
+              fontSize: 24,
+              fontFamily: 'Helvetica',
+              fontWeight: 400
+            }
+          },
+          tooltip: {
+            trigger: 'item'
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {},
+              dataView: {}
+            },
+            right: 15,
+            top: 10
+          },
+          bmap: {
+            center: [114.427461, 30.51729],
+            zoom: 15,
+            roam: true,
+            mapStyle: {
+                style: 'normal'
+            }
+          },
+          series: [
+            {
+              name: '最喜爱食堂',
+              type: 'scatter',
+              coordinateSystem: 'bmap',
+              data: this.convertData(this.canteenContent),
+              symbolSize: function (val) {
+                return (val[2] + 3) * 2;
+              },
+              label: {
+                normal: {
+                  formatter: '{b}',
+                  position: 'right',
+                  show: true
+                },
+                emphasis: {
+                  show: true
+                }
+              },
+              itemStyle: {
+                normal: {
+                  color: 'purple'
+                }
+              }
+            },
+            {
+              name: 'Top 3',
+              type: 'effectScatter',
+              coordinateSystem: 'bmap',
+              data: this.convertData(this.canteenContent.sort(function (a, b) {
+                return b.value - a.value;
+              }).slice(0, 4)),
+              symbolSize: function (val) {
+                return (val[2] + 3) * 2;
+              },
+              showEffectOn: 'render',
+              rippleEffect: {
+                scale: 2,
+                brushType: 'fill'
+              },
+              hoverAnimation: true,
+              label: {
+                normal: {
+                  formatter: '{b}',
+                  position: 'right',
+                  show: true
+                }
+              },
+              itemStyle: {
+                normal: {
+                  color: 'purple',
+                  shadowBlur: 10,
+                  shadowColor: '#333'
+                }
+              },
+              zlevel: 1
+            }
+          ]
+        })
       }        
     },
     mounted() {
-      this.chart = echarts.init(document.getElementById('canteen'))
-      this.chart.setOption({
-        title: {
-          text: '学生最喜爱学生食堂分布',
-          left: 'center',
-          top: 15,
-          textStyle: {
-            fontSize: 24,
-            fontFamily: 'Helvetica',
-            fontWeight: 400
-          }
-        },
-        tooltip: {
-          trigger: 'item'
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {},
-            dataView: {}
-          },
-          right: 15,
-          top: 10
-        },
-        bmap: {
-          center: [114.427461, 30.51729],
-          zoom: 15,
-          roam: true,
-          mapStyle: {
-              style: 'normal'
-          }
-        },
-        series: [
-          {
-            name: '最喜爱食堂',
-            type: 'scatter',
-            coordinateSystem: 'bmap',
-            data: this.convertData(this.canteenContent),
-            symbolSize: function (val) {
-              return (val[2] + 3) * 2;
-            },
-            label: {
-              normal: {
-                formatter: '{b}',
-                position: 'right',
-                show: true
-              },
-              emphasis: {
-                show: true
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: 'purple'
-              }
-            }
-          },
-          {
-            name: 'Top 3',
-            type: 'effectScatter',
-            coordinateSystem: 'bmap',
-            data: this.convertData(this.canteenContent.sort(function (a, b) {
-              return b.value - a.value;
-            }).slice(0, 4)),
-            symbolSize: function (val) {
-              return (val[2] + 3) * 2;
-            },
-            showEffectOn: 'render',
-            rippleEffect: {
-              scale: 2,
-              brushType: 'fill'
-            },
-            hoverAnimation: true,
-            label: {
-              normal: {
-                formatter: '{b}',
-                position: 'right',
-                show: true
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: 'purple',
-                shadowBlur: 10,
-                shadowColor: '#333'
-              }
-            },
-            zlevel: 1
-          }
-        ]
+      this.$nextTick(function() {
+        this.drawMap('canteen')
       })
     }
   }
@@ -162,11 +167,12 @@
   width: 800px;
   height: 600px;
   box-shadow: 0 0 8px #FBD157;
+  border-radius: 10px;
 } 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #canteen {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
 }      
 </style>

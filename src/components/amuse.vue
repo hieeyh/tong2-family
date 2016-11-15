@@ -33,183 +33,190 @@
         color: ['#a2b4ba', '#85b6b2', '#6d4f8d', '#cd5e7e', '#e38980', '#f7db88']
       }
     },
-    mounted() {
-      this.chart = echarts.init(document.getElementById('amuse'))
-      this.chart.setOption({
-        title: {
-          text: '周末休闲娱乐方式调查',
-          left: 'center',
-          top: 10,
-          textStyle: {
-            fontSize: 24,
-            fontFamily: 'Helvetica',
-            fontWeight: 400
-          }
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {},
-            dataView: {}
-          },
-          right: 15,
-          top: 10
-        },
-        legend: {
-            orient: 'vertical',
-            left: 5,
+    methods: {
+      drawPie (id) {
+        this.chart = echarts.init(document.getElementById(id))
+        this.chart.setOption({
+          title: {
+            text: '周末休闲娱乐方式调查',
+            left: 'center',
             top: 10,
-            data: this.amuse,
-        },
-        series: [
-          {
-            name: '打游戏',
-            type: 'pie',
-            clockWise:false,
-            radius: [220, 240],
-            itemStyle: {
-              normal: {
-                color: this.color[0],
-                label: {show:false},
-                labelLine: {show:false},
-                shadowBlur: 40,
-                shadowColor: 'rgba(40, 40, 40, 0.5)',
-              }
-            },
-            hoverAnimation: false,
-            data: [
-              this.amuseData[0],
-              {
-                value: 4,
-                name: 'invisible',
-                itemStyle: this.placeHolderStyle
-              }
-            ]
+            textStyle: {
+              fontSize: 24,
+              fontFamily: 'Helvetica',
+              fontWeight: 400
+            }
           },
-          {
-            name: '刷微博朋友圈',
-            type: 'pie',
-            clockWise:false,
-            radius: [200, 220],
-            itemStyle: {
-              normal: {
-                color: this.color[1],
-                label: {show:false},
-                labelLine: {show:false},
-                shadowBlur: 40,
-                shadowColor: 'rgba(40, 40, 40, 0.5)',
-              }
-            },
-            hoverAnimation: false,
-            data: [
-              this.amuseData[0],
-              {
-                value: 14,
-                name: 'invisible',
-                itemStyle: this.placeHolderStyle
-              }
-            ]
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
           },
-          {
-            name: '看剧',
-            type: 'pie',
-            clockWise: false,
-            radius: [180, 200],
-            itemStyle: {
-              normal: {
-                color: this.color[2],
-                label: {show:false},
-                labelLine: {show:false},
-                shadowBlur: 40,
-                shadowColor: 'rgba(40, 40, 40, 0.5)',
-              }
+          toolbox: {
+            feature: {
+              saveAsImage: {},
+              dataView: {}
             },
-            hoverAnimation: false,
-            data: [
-              this.amuseData[0],
-              {
-                value: 18,
-                name: 'invisible',
-                itemStyle: this.placeHolderStyle
-              }
-            ]
+            right: 15,
+            top: 10
           },
-          {
-            name: '运动',
-            type: 'pie',
-            clockWise:false,
-            radius: [160, 180],
-            itemStyle: {
-              normal: {
-                color: this.color[3],
-                label: {show:false},
-                labelLine: {show:false},
-                shadowBlur: 40,
-                shadowColor: 'rgba(40, 40, 40, 0.5)',
-              }
-            },
-            hoverAnimation: false,
-            data: [
-              this.amuseData[0],
-              {
-                value: 20,
-                name: 'invisible',
-                itemStyle: this.placeHolderStyle
-              }
-            ]
+          legend: {
+              orient: 'vertical',
+              left: 5,
+              top: 10,
+              data: this.amuse,
           },
-          {
-            name: '听歌',
-            type: 'pie',
-            clockWise:false,
-            radius: [140, 160],
-            itemStyle: {
-              normal: {
-                color: this.color[4],
-                label: {show:false},
-                labelLine: {show:false},
-                shadowBlur: 40,
-                shadowColor: 'rgba(40, 40, 40, 0.5)',
-              }
+          series: [
+            {
+              name: '打游戏',
+              type: 'pie',
+              clockWise:false,
+              radius: [220, 240],
+              itemStyle: {
+                normal: {
+                  color: this.color[0],
+                  label: {show:false},
+                  labelLine: {show:false},
+                  shadowBlur: 40,
+                  shadowColor: 'rgba(40, 40, 40, 0.5)',
+                }
+              },
+              hoverAnimation: false,
+              data: [
+                this.amuseData[0],
+                {
+                  value: 4,
+                  name: 'invisible',
+                  itemStyle: this.placeHolderStyle
+                }
+              ]
             },
-            hoverAnimation: false,
-            data: [
-              this.amuseData[0],
-              {
-                value: 28,
-                name: 'invisible',
-                itemStyle: this.placeHolderStyle
-              }
-            ]
-          },
-          {
-            name: '看小说',
-            type: 'pie',
-            clockWise:false,
-            radius: [120, 140],
-            itemStyle: {
-              normal: {
-                color: this.color[5],
-                label: {show:false},
-                labelLine: {show:false},
-                shadowBlur: 40,
-                shadowColor: 'rgba(40, 40, 40, 0.5)',
-              }
+            {
+              name: '刷微博朋友圈',
+              type: 'pie',
+              clockWise:false,
+              radius: [200, 220],
+              itemStyle: {
+                normal: {
+                  color: this.color[1],
+                  label: {show:false},
+                  labelLine: {show:false},
+                  shadowBlur: 40,
+                  shadowColor: 'rgba(40, 40, 40, 0.5)',
+                }
+              },
+              hoverAnimation: false,
+              data: [
+                this.amuseData[0],
+                {
+                  value: 14,
+                  name: 'invisible',
+                  itemStyle: this.placeHolderStyle
+                }
+              ]
             },
-            hoverAnimation: false,
-            data: [
-              this.amuseData[0],
-              {
-                value: 28,
-                name: 'invisible',
-                itemStyle: this.placeHolderStyle
-              }
-            ]
-          }
-        ]
+            {
+              name: '看剧',
+              type: 'pie',
+              clockWise: false,
+              radius: [180, 200],
+              itemStyle: {
+                normal: {
+                  color: this.color[2],
+                  label: {show:false},
+                  labelLine: {show:false},
+                  shadowBlur: 40,
+                  shadowColor: 'rgba(40, 40, 40, 0.5)',
+                }
+              },
+              hoverAnimation: false,
+              data: [
+                this.amuseData[0],
+                {
+                  value: 18,
+                  name: 'invisible',
+                  itemStyle: this.placeHolderStyle
+                }
+              ]
+            },
+            {
+              name: '运动',
+              type: 'pie',
+              clockWise:false,
+              radius: [160, 180],
+              itemStyle: {
+                normal: {
+                  color: this.color[3],
+                  label: {show:false},
+                  labelLine: {show:false},
+                  shadowBlur: 40,
+                  shadowColor: 'rgba(40, 40, 40, 0.5)',
+                }
+              },
+              hoverAnimation: false,
+              data: [
+                this.amuseData[0],
+                {
+                  value: 20,
+                  name: 'invisible',
+                  itemStyle: this.placeHolderStyle
+                }
+              ]
+            },
+            {
+              name: '听歌',
+              type: 'pie',
+              clockWise:false,
+              radius: [140, 160],
+              itemStyle: {
+                normal: {
+                  color: this.color[4],
+                  label: {show:false},
+                  labelLine: {show:false},
+                  shadowBlur: 40,
+                  shadowColor: 'rgba(40, 40, 40, 0.5)',
+                }
+              },
+              hoverAnimation: false,
+              data: [
+                this.amuseData[0],
+                {
+                  value: 28,
+                  name: 'invisible',
+                  itemStyle: this.placeHolderStyle
+                }
+              ]
+            },
+            {
+              name: '看小说',
+              type: 'pie',
+              clockWise:false,
+              radius: [120, 140],
+              itemStyle: {
+                normal: {
+                  color: this.color[5],
+                  label: {show:false},
+                  labelLine: {show:false},
+                  shadowBlur: 40,
+                  shadowColor: 'rgba(40, 40, 40, 0.5)',
+                }
+              },
+              hoverAnimation: false,
+              data: [
+                this.amuseData[0],
+                {
+                  value: 28,
+                  name: 'invisible',
+                  itemStyle: this.placeHolderStyle
+                }
+              ]
+            }
+          ]
+        })
+      }
+    },
+    mounted() {
+      this.$nextTick(function() {
+        this.drawPie('amuse')
       })
     }
   }
@@ -228,12 +235,13 @@
   margin-bottom: 70px;
   width: 800px;
   height: 660px;
-  box-shadow: 0 0 10px #a2b4ba
+  box-shadow: 0 0 10px #a2b4ba;
+  border-radius: 10px;
 }   
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #amuse {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
 }
 </style>

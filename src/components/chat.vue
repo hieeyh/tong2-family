@@ -199,6 +199,8 @@
           series: {
             name: '发言量',
             type: 'line',
+            symbol: 'triangle',
+            symbolSize: 8,
             data: this.computeTotalSpeak(speaks),
             markLine: {
               silent: true,
@@ -222,8 +224,10 @@
       // console.log(this.computeTotalSpeak(speaks))
       // console.log(speaks)
       // console.log(this.convertData(relations))
-      this.drawHeatMap('relation')
-      this.drawLine('activetime')
+      this.$nextTick(function() {
+        this.drawHeatMap('relation')
+        this.drawLine('activetime')
+      })
     }
   }
 </script>
@@ -242,20 +246,21 @@
   width: 800px;
   height: 900px;
   box-shadow: 0 0 10px #EDE68A;
+  border-radius: 10px;
 } 
 #activetime {
   height: 600px;
   margin-top: 30px;
   margin-bottom: 70px;
 }
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #relation,
   #activetime {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
   #activetime {
-    top: 930px;
+    top: 900px;
   }
 }
 </style>

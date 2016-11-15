@@ -20,59 +20,66 @@
         ]
       }
     },
-    mounted() {
-      this.chart = echarts.init(document.getElementById('graduate'))
-      this.chart.setOption({
-        title: {
-          text: '毕业展望调查结果',
-          left: 'center',
-          top: 10,
-          textStyle: {
-            fontSize: 24,
-            fontFamily: 'Helvetica',
-            fontWeight: 400
-          }
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {},
-            dataView: {}
-          },
-          right: 15,
-          top: 10
-        },
-        legend: {
-            orient: 'vertical',
-            left: 5,
+    methods: {
+      drawPie (id) {
+        this.chart = echarts.init(document.getElementById(id))
+        this.chart.setOption({
+          title: {
+            text: '毕业展望调查结果',
+            left: 'center',
             top: 10,
-            data: this.opinion,
-        },
-        series: [
-          {
-            name: '人数',
-            type: 'pie',
-            selectedMode: 'single',
-            radius: '70%',
-            center: ['50%', '60%'],
-            data: this.opinionData,
-            itemStyle: {
-              normal: {
-                borderWidth: 0.5,
-                borderColor: '#ffffff'
-              },
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffset: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            textStyle: {
+              fontSize: 24,
+              fontFamily: 'Helvetica',
+              fontWeight: 400
+            }
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {},
+              dataView: {}
+            },
+            right: 15,
+            top: 10
+          },
+          legend: {
+              orient: 'vertical',
+              left: 5,
+              top: 10,
+              data: this.opinion,
+          },
+          series: [
+            {
+              name: '人数',
+              type: 'pie',
+              selectedMode: 'single',
+              radius: '70%',
+              center: ['50%', '60%'],
+              data: this.opinionData,
+              itemStyle: {
+                normal: {
+                  borderWidth: 0.5,
+                  borderColor: '#ffffff'
+                },
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffset: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
               }
             }
-          }
-        ]
-      })
+          ]
+        })
+      }
+    },
+    mounted() {
+      this.$nextTick(function() {
+        this.drawPie('graduate')
+      }) 
     }
   }
 </script>
@@ -92,11 +99,12 @@
   height: 600px;
   border: solid #E3670C 1px;
   box-shadow: 0 0 8px #FBB448;
+  border-radius: 10px;
 }   
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #graduate {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
 }
 </style>

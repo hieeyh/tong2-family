@@ -187,9 +187,11 @@
       }
     },
     mounted() {
-      // console.log(this.$route)
-      this.drawpie('difficultpie')
-      this.drawbar('difficultbar')
+      this.$nextTick(function() {
+        // console.log(this.$route)
+        this.drawpie('difficultpie')
+        this.drawbar('difficultbar')
+      })      
     }
   }
 </script>
@@ -209,19 +211,20 @@
   height: 600px;
   border: solid #faf6f3 2px;
   box-shadow: 0 0 10px #F7D098;
+  border-radius: 10px;
 }  
 #difficultbar {
   margin-top: 40px;
   margin-bottom: 80px;
 }
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #difficultpie,
   #difficultbar {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
   #difficultbar {
-    top: 610px;
+    top: 604px;
   }
 }
 </style>

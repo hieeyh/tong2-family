@@ -134,8 +134,10 @@
       }
     },
     mounted() {
-      this.drawbar('gotobedbar')
-      this.drawpie('gotobedpie')
+      this.$nextTick(function() {
+        this.drawbar('gotobedbar')
+        this.drawpie('gotobedpie')
+      })
     }
   }
 </script>
@@ -154,19 +156,20 @@
   width: 800px;
   height: 600px;
   box-shadow: 0 0 10px #884EA2;
+  border-radius: 10px;
 }  
 #gotobedpie {
   margin-top: 60px;
   margin-bottom: 70px;
 } 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #gotobedbar,
   #gotobedpie {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
   #gotobedpie {
-    top: 610px;
+    top: 600px;
   }
 }
 </style>

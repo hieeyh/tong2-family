@@ -149,9 +149,11 @@
     mounted() {
        // console.log(this.getId(qqs), activeTime[this.getId(qqs)])
       // console.log(this.computeMyTotalSpeak(activeTime, this.getId(qqs)))
-      if(this.isqqRight) {
-        this.drawLine('myactivetime')
-      } 
+      this.$nextTick(function() {
+        if(this.isqqRight) {
+          this.drawLine('myactivetime')
+        } 
+      })   
     }
   }
 </script>
@@ -170,11 +172,12 @@
   width: 800px;
   height: 600px;
   box-shadow: 0 0 10px #EDE68A;
+  border-radius: 10px;
 } 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #myactivetime {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
 }
 .prompt {

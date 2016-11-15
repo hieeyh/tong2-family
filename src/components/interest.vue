@@ -138,8 +138,10 @@
       }
     },
     mounted() {
-      this.drawpie('interestpie')
-      this.drawbar('interestbar')
+      this.$nextTick(function() {
+        this.drawpie('interestpie')
+        this.drawbar('interestbar')
+      }) 
     }
   }
 </script>
@@ -159,19 +161,20 @@
   height: 620px;
   border: solid #00AD7C 1px;
   box-shadow: 0 0 8px #52D681;
+  border-radius: 10px;
 }   
 #interestbar {
   margin-top: 30px;
   margin-bottom: 70px;
 }
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #interestpie,
   #interestbar {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
   #interestbar {
-    top: 610px;
+    top: 622px;
   }
 }
 </style>

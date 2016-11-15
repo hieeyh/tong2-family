@@ -135,8 +135,10 @@
       }
     },
     mounted() {
-      this.drawbar('getupbar')
-      this.drawpie('getuppie')
+      this.$nextTick(function() {
+        this.drawbar('getupbar')
+        this.drawpie('getuppie')
+      })
     }
   }
 </script>
@@ -155,19 +157,20 @@
   width: 800px;
   height: 600px;
   box-shadow: 0 0 10px #BF382A;
+  border-radius: 10px;
 }  
 #getuppie {
   margin-top: 60px;
   margin-bottom: 70px;
 }
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1090px) {
   #getupbar,
   #getuppie {
     position: absolute;
-    left: 408px;
+    left: 415px;
   }
   #getuppie {
-    top: 610px;
+    top: 600px;
   }
 }
 </style>

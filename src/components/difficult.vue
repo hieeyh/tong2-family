@@ -7,7 +7,7 @@
 
 <script>
   import echarts from 'echarts'
-
+  import '../../node_modules/echarts/theme/vintage.js'
   export default {
     data() {
       return {
@@ -27,7 +27,7 @@
     },
     methods: {
       drawpie(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id), 'vintage')
         this.chart.setOption({
           title: {
             text: '电信大二上课程难度调查结果',

@@ -7,6 +7,7 @@
 
 <script>
   import echarts from 'echarts'
+  import '../../node_modules/echarts/theme/vintage.js'
 
   export default {
     data() {
@@ -27,7 +28,7 @@
     },
     methods: {
       drawbar(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id), 'vintage')
         this.chart.setOption({
           title: {
             text: '工作日起床时间调查结果',
@@ -95,7 +96,7 @@
         })
       },
       drawpie(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id), 'vintage')
         this.chart.setOption({
           tooltip: {
             trigger: 'item',

@@ -7,6 +7,7 @@
 
 <script>
   import echarts from 'echarts'
+  import '../../node_modules/echarts/theme/infographic.js'
 
   export default {
     data() {
@@ -29,7 +30,7 @@
     },
     methods: {
       drawpie(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id), 'infographic')
         this.chart.setOption({
           title: {
             text: '电信大二上学生最感兴趣课程调查结果',
@@ -80,7 +81,7 @@
         })
       },
       drawbar(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id), 'infographic')
         this.chart.setOption({
           tooltip: {
             trigger: 'item',

@@ -71,7 +71,8 @@
               fontSize: 24,
               fontFamily: 'Helvetica',
               fontWeight: 400
-            }
+            },
+            textAlign: 'center'
           },
           tooltip: {
             trigger: 'item'

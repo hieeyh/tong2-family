@@ -6,6 +6,7 @@
 
 <script>
   import echarts from 'echarts'
+  import '../../node_modules/echarts/theme/roma.js'
 
   export default {
     data() {
@@ -22,7 +23,7 @@
     },
     methods: {
       drawPie (id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id), 'roma')
         this.chart.setOption({
           title: {
             text: '毕业展望调查结果',

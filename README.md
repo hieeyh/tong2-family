@@ -1,28 +1,33 @@
-# family
+# tong2-family
 
-> the statistics about tong2 family
+> 使用vue、vuex、vue-router、echarts搭建的一个班级数据展示平台
 不支持IE8及其以下版本
 
-## Build Setup
+## 运行步骤
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 在本地启动服务，并且通过localhost:8080地址进行访问
 npm run dev
 
-# build for production with minification
+# 编译并压缩代码便于发布
 npm run build
 
-# run unit tests
+# 运行单元测试
 npm run unit
+``` 
+## 在线访问
+[]()
 
-# run e2e tests
-npm run e2e
+## 源码说明
+### 项目目录说明
+```
 
-# run all tests
-npm test
-```  
+```
+
+## 教程
+我的博客：[]()
 
 **IM_analyze**文件夹中是python写的分析群聊数据的相关代码

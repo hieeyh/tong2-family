@@ -51,5 +51,3 @@ npm run unit
 
 ## 教程
 我的博客：[]()
-
-**IM_analyze**文件夹中是python写的分析群聊数据的相关代码

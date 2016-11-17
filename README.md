@@ -20,10 +20,8 @@ npm run build
 npm run unit
 ``` 
 
-## 演示
-![演示](https://github.com/hieeyh/tong2-family/blob/master/show.gif)
 ## 在线访问
-[]()   
+[http://119.29.57.165:8080/family](http://119.29.57.165:8080/family)   
 **注意**：只有用通信1502班同学的qq号登陆才能看到我的群聊活跃时间
 
 ## 源码说明

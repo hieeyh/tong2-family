@@ -1,7 +1,8 @@
 # tong2-family
 
-> 使用vue、vuex、vue-router、echarts搭建的一个班级数据展示平台   
+> 使用vue、vuex、vue-router、echarts搭建的一个数据展示平台   
 > 不支持IE8及其以下版本，单页面应用
+> 对华科电信大二学生的做了一些调查，对调查结果进行可视化展示，同时分析了通信1502班的群聊记录，得到班级群聊活跃度等信息。
 
 ## 运行步骤
 
@@ -19,44 +20,32 @@ npm run build
 npm run unit
 ``` 
 ## 在线访问
-[]()
+[]()   
+**注意**：
 
 ## 源码说明
 ```
 .
+|-- IM_analyze                       // 用python进行群聊数据分析的相关代码
+|-- build                            // 项目构建相关代码
 |-- config                           // 项目开发环境配置
-|   |-- index.js                     // 项目打包部署配置
-|-- src                              // 源码目录
-|   |-- components                   // 公共组件
-|       |-- header.vue               // 页面头部公共组件
-|       |-- index.js                 // 加载各种公共组件
-|   |-- config                       // 路由配置和程序的基本信息配置
-|       |-- routes.js                // 配置页面路由
-|   |-- css                          // 各种css文件
-|       |-- common.css               // 全局通用css文件
-|   |-- iconfont                     // 各种字体图标
-|   |-- images                       // 公共图片
-|   |-- less                         // 各种less文件
-|       |-- common.less              // 全局通用less文件
-|   |-- pages                        // 页面组件
-|       |-- home                     // 个人中心
-|       |-- index                    // 网站首页
-|       |-- login                    // 登录
-|       |-- signout                  // 退出
+|-- data                             // 群聊分析得到的数据用于数据可视化
+|-- src                              // 源码目录                     
+|   |-- components                   // vue公共组件
 |   |-- store                        // vuex的状态管理
-|       |-- index.js                 // 加载各种store模块
-|       |-- user.js                  // 用户store
-|   |-- template                     // 各种html文件
-|       |-- index.html               // 程序入口html文件
-|   |-- util                         // 公共的js方法，vue的mixin混合
-|   |-- app.vue                      // 页面入口文件
+|       |-- store.js                 // 加载各种store模块
+|       |-- login.js                 // 登录状态相关store
+|       |-- user.js                  // 用户相关store
+|   |-- App.vue                      // 页面入口文件
 |   |-- main.js                      // 程序入口文件，加载各种公共组件
+|-- static
 |-- .babelrc                         // ES6语法编译配置
-|-- gulpfile.js                      // 启动，打包，部署，自动化构建
-|-- webpack.config.js                // 程序打包配置
-|-- server.js                        // 代理服务器配置
+|-- .editorconfig                    // 定义代码格式
+|-- .gitignore                       // git上传需要忽略的文件格式
 |-- README.md                        // 项目说明
-|-- package.json                     // 配置项目相关信息，通过执行 npm init 命令创建
+|-- favicon.ico 
+|-- index.html                       // 入口页面
+|-- package.json                     // 项目配置相关信息
 .
 ```
 

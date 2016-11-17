@@ -2,7 +2,7 @@
   <div class="main_content">
     <div v-if="isqqRight" id="myactivetime"></div>
     <div v-else="isqqRight" class="prompt">
-     用正确的qq号登录才能查看本页
+     用通信1502班学生的qq号登录才能查看本页
     </div>
   </div>
 </template>

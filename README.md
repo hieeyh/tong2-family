@@ -29,7 +29,6 @@ npm run unit
 |-- IM_analyze                       // 用python进行群聊数据分析的相关代码
 |-- build                            // 项目构建相关代码
 |-- config                           // 项目开发环境配置
-|-- data                             // 群聊分析得到的数据用于数据可视化
 |-- src                              // 源码目录                     
 |   |-- components                   // vue公共组件
 |   |-- store                        // vuex的状态管理
@@ -39,6 +38,7 @@ npm run unit
 |   |-- App.vue                      // 页面入口文件
 |   |-- main.js                      // 程序入口文件，加载各种公共组件
 |-- static
+|   |-- data                         // 群聊分析得到的数据用于数据可视化
 |-- .babelrc                         // ES6语法编译配置
 |-- .editorconfig                    // 定义代码格式
 |-- .gitignore                       // git上传需要忽略的文件格式

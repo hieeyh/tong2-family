@@ -16,8 +16,8 @@
     color: #777;
   }
   p {
-    line-height: 50px;
-    margin-left: 20px;
+    line-height: 40px;
+    margin-left: 24px;
     font-size: 12px;
   }
   span {

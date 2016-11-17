@@ -48,6 +48,10 @@ export default {
   overflow-y: auto;
   z-index: 15;
 }
+.nav-left {
+  width: 164px;
+  font-family: "Microsoft Yahei", sans-serif;
+}
 .nav-item a {
   color: #b2b2b2;
   size: 14px;

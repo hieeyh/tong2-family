@@ -3,7 +3,7 @@
   <div class="top-bar clearfix">
     <div class="topbar-nav">
       <ul class="nav-wrap">
-        <li class="nav">华科电信小范围调查结果展示平台</li>
+        <li class="nav">一个班主任对学生做的小调查与数据分析</li>
       </ul>
     </div>
     <div v-if="hasLogin" class="topbar-info">
@@ -67,6 +67,7 @@
   background-color: #fff;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   z-index: 100;
+  font-family: "Microsoft Yahei", sans-serif;
 }
 .topbar-nav {
   float: left;

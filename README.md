@@ -19,6 +19,9 @@ npm run build
 # 运行单元测试
 npm run unit
 ``` 
+
+## 演示
+![演示](https://github.com/hieeyh/tong2-family/blob/master/show.gif)
 ## 在线访问
 []()   
 **注意**：只有用通信1502班同学的qq号登陆才能看到我的群聊活跃时间

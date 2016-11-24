@@ -9,8 +9,8 @@
 
 <script>
   import echarts from 'echarts'
-  import qqs from '../../static/data/index2QQ_id.json'
-  import activeTime from '../../static/data/dayVectors.json'
+  import qqs from 'static/data/index2QQ_id.json'
+  import activeTime from 'static/data/dayVectors.json'
 
   export default {
     data() {

@@ -49,7 +49,7 @@ export default {
   z-index: 15;
 }
 .nav-left {
-  width: 164px;
+  width: 168px;
   font-family: "Microsoft Yahei", sans-serif;
 }
 .nav-item a {

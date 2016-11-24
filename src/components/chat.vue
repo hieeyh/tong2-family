@@ -7,8 +7,8 @@
 
 <script>
   import echarts from 'echarts'
-  import relations from '../../static/data/similarityMatrix.json'
-  import speaks from '../../static/data/dayVectors.json'
+  import relations from 'static/data/similarityMatrix.json'
+  import speaks from 'static/data/dayVectors.json'
 
   export default {
     data() {

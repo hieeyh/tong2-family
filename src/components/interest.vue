@@ -1,47 +1,25 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="interestpie"></div>
     <div id="interestbar"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
-  import '../../node_modules/echarts/theme/infographic.js'
+  import echarts from 'echarts';
+  import '../../node_modules/echarts/theme/infographic.js';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
-        chart: null,
-        course: ['数电', '模电', '全没兴趣', '体育', '人文选修', '复变', '数据结构', '大物', '电路实验'],
-        courseInter: [
-          {value:18, name:'数电'},
-          {value:17, name:'模电'},
-          {value:10, name:'全没兴趣'},
-          {value:6, name:'体育'},
-          {value:4, name:'人文选修'},
-          {value:4, name:'复变'},
-          {value:3, name:'数据结构'},
-          {value:3, name:'大物'},
-          {value:2, name:'电路实验'}
-        ],
-        courseData: [18, 17, 10, 6, 4, 4, 3, 3, 2]
-      }
+        chart: null
+      };
     },
     methods: {
-      drawpie(id) {
-        this.chart = echarts.init(document.getElementById(id), 'infographic')
+      drawpie(id, small, big, centery) {
+        this.chart = echarts.init(document.getElementById(id), 'infographic');
         this.chart.setOption({
-          title: {
-            text: '电信大二上学生最感兴趣课程调查结果',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -58,17 +36,17 @@
               orient: 'vertical',
               left: 5,
               top: 10,
-              data: this.course,
+              data: data.interest.course,
           },
           calculable: true,
           series: [
             {
               name: '人数',
               type: 'pie',
-              radius: [60, 240],
-              center: ['50%', '60%'],
+              radius: [small, big],
+              center: ['55%', centery],
               roseType: 'radius',
-              data: this.courseInter,
+              data: data.interest.courseInter,
               itemStyle: {
                 emphasis: {
                   shadowBlur: 10,
@@ -78,10 +56,10 @@
               }
             }
           ]
-        })
+        });
       },
-      drawbar(id) {
-        this.chart = echarts.init(document.getElementById(id), 'infographic')
+      drawbar(id, gap, barwidth) {
+        this.chart = echarts.init(document.getElementById(id), 'infographic');
         this.chart.setOption({
           tooltip: {
             trigger: 'item',
@@ -96,7 +74,7 @@
             top: 10
           },
           xAxis: {
-            data: this.course,
+            data: data.interest.course,
             axisLabel: {
               textStyle: {
                 color: '#dcf7a1',
@@ -109,7 +87,7 @@
           yAxis: {
             name: '人数',
             nameLocation: 'middle',
-            nameGap: 28,
+            nameGap: gap,
             nameTextStyle: {
               fontWeight: 200,
               fontSize: 14
@@ -123,8 +101,8 @@
             {
               name: '人数',
               type: 'bar',
-              data: this.courseData,
-              barWidth: 40,
+              data: data.interest.courseData,
+              barWidth: barwidth,
               itemStyle: {
                 normal: {
                   barBorderRadius: 20,
@@ -135,47 +113,55 @@
               }
             }
           ]
-        }) 
+        }); 
       }
     },
     mounted() {
       this.$nextTick(function() {
-        this.drawpie('interestpie')
-        this.drawbar('interestbar')
-      }) 
+        if (document.body.clientWidth < 560) {
+          this.drawpie('interestpie', 30, 100, '70%');
+          this.drawbar('interestbar', 20, 25);
+        } else {
+          this.drawpie('interestpie', 60, 240, '60%');
+          this.drawbar('interestbar', 28, 40);
+        }
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            if (document.body.clientWidth < 560) {
+              that.drawpie('interestpie', 30, 100, '70%');
+              that.drawbar('interestbar', 20, 25);
+            } else {
+              that.drawpie('interestpie', 60, 240, '60%');
+              that.drawbar('interestbar', 28, 40);
+            }
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#interestpie,
-#interestbar {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  width: 800px;
-  height: 620px;
-  border: solid #00AD7C 1px;
-  box-shadow: 0 0 8px #52D681;
-  border-radius: 10px;
-}   
-#interestbar {
-  margin-top: 30px;
-  margin-bottom: 70px;
-}
-@media screen and (max-width: 1090px) {
   #interestpie,
   #interestbar {
-    position: absolute;
-    left: 415px;
-  }
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 620px;
+    margin-left: -45%;
+    border: solid #00AD7C 1px;
+    box-shadow: 0 0 8px #52D681;
+    border-radius: 10px;
+  }   
   #interestbar {
-    top: 622px;
+    margin-top: 30px;
   }
-}
+  @media screen and (max-width: 560px) {
+    #interestpie {
+      height: 500px;
+    }
+  }
 </style>

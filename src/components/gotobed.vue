@@ -1,42 +1,24 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="gotobedbar"></div>
     <div id="gotobedpie"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
+  import echarts from 'echarts';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
-        chart: null,
-        time: ['11点', '11点半', '12点', '12点半', '1点及以后'],
-        number: [4, 9, 32, 14, 4],
-        numberData: [
-          {value:4, name:'11点'},
-          {value:9, name:'11点半'},
-          {value:32, name:'12点'},
-          {value:14, name:'12点半'},
-          {value:4, name:'1点及以后'}
-        ]
-      }
+        chart: null
+      };
     },
     methods: {
       drawbar(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
-          title: {
-            text: '工作日睡觉时间调查结果',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'axis'
           },
@@ -61,7 +43,7 @@
             {
               type: 'category',
               boundrayGap: false,
-              data: this.time
+              data: data.gotobed.time
             }
           ],
           yAxis: [
@@ -91,13 +73,13 @@
                 }
               },
               areaStyle: {normal: {}},
-              data: this.number
+              data: data.gotobed.number
             }
           ]
-        })
+        });
       },
       drawpie(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
           tooltip: {
             trigger: 'item',
@@ -107,7 +89,7 @@
             orient: 'vertical',
             left: 5,
             top: 10,
-            data: this.time,
+            data: data.gotobed.time,
           },
           series: [
             {
@@ -116,7 +98,7 @@
               selectedMode: 'single',
               radius: '70%',
               center: ['50%', '60%'],
-              data: this.numberData,
+              data: data.gotobed.numberData,
               itemStyle: {
                 normal: {
                   borderWidth: 0.5,
@@ -130,46 +112,44 @@
               }
             }
           ]
-        })
+        });
       }
     },
     mounted() {
       this.$nextTick(function() {
-        this.drawbar('gotobedbar')
-        this.drawpie('gotobedpie')
-      })
+        this.drawbar('gotobedbar');
+        this.drawpie('gotobedpie');
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            that.drawbar('gotobedbar');
+            that.drawpie('gotobedpie');
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#gotobedbar,
-#gotobedpie {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  width: 800px;
-  height: 600px;
-  box-shadow: 0 0 10px #884EA2;
-  border-radius: 10px;
-}  
-#gotobedpie {
-  margin-top: 60px;
-  margin-bottom: 70px;
-} 
-@media screen and (max-width: 1090px) {
   #gotobedbar,
   #gotobedpie {
-    position: absolute;
-    left: 415px;
-  }
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 600px;
+    margin-left: -45%;
+    box-shadow: 0 0 10px #884EA2;
+    border-radius: 10px;
+  }  
   #gotobedpie {
-    top: 600px;
+    margin-top: 30px;
+  } 
+  @media screen and (max-width: 470px) {
+    #gotobedpie {
+      height: 500px;
+    }
   }
-}
 </style>

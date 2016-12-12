@@ -1,44 +1,25 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="difficultpie"></div>
     <div id="difficultbar"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
-  import '../../node_modules/echarts/theme/vintage.js'
+  import echarts from 'echarts';
+  import '../../node_modules/echarts/theme/vintage.js';
+  import data from 'static/data/data.json';
+
   export default {
     data() {
       return {
-        chart: null,
-        course: ['模电', '都很难', '全不难', '数电', '复变', '电路实验', '大物'],
-        courseDiff: [
-          {value:13, name:'模电'},
-          {value:5, name:'都很难'},
-          {value:5, name:'全不难'},
-          {value:3, name:'数电'},
-          {value:2, name:'复变'},
-          {value:2, name:'电路实验'},
-          {value:1, name:'大物'}
-        ],
-        courseBar: [13, 5, 5, 3, 2, 2, 1]
-      }
+        chart: null
+      };
     },
     methods: {
-      drawpie(id) {
-        this.chart = echarts.init(document.getElementById(id), 'vintage')
+      drawpie(id, radius, centery) {
+        this.chart = echarts.init(document.getElementById(id), 'vintage');
         this.chart.setOption({
-          title: {
-            text: '电信大二上课程难度调查结果',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -55,15 +36,15 @@
             orient: 'vertical',
             left: 5,
             top: 15,
-            data: this.course,
+            data: data.difficult.course,
           },
           series: [
             {
               name: '人数',
               type: 'pie',
-              radius: '70%',
-              center: ['50%', '60%'],
-              data: this.courseDiff,
+              radius: radius,
+              center: ['50%', centery],
+              data: data.difficult.courseDiff,
               itemStyle: {
                 emphasis: {
                   shadowBlur: 10,
@@ -73,10 +54,10 @@
               }
             }
           ]
-        })
+        });
       },
       drawbar(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
           backgroundColor: '#faf6f3',
           tooltip: {
@@ -131,7 +112,7 @@
                 color: '#cfc3bd'
               }
             },
-            data: this.course
+            data: data.difficult.course
           },
           series: [
             {
@@ -165,7 +146,7 @@
                   }])
                 }
               },
-              data: this.courseBar
+              data: data.difficult.courseData
             },
             {
               type: 'bar',
@@ -183,48 +164,55 @@
               barMinHeight: 4
             }
           ]
-        })
+        });
       }
     },
     mounted() {
       this.$nextTick(function() {
-        // console.log(this.$route)
-        this.drawpie('difficultpie')
-        this.drawbar('difficultbar')
-      })      
+        if (document.body.clientWidth < 420) {
+          this.drawpie('difficultpie', '65%', '68%');
+        } else {
+          this.drawpie('difficultpie', '70%', '60%');
+        }
+        this.drawbar('difficultbar');
+        
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          // console.log(window.screen.availWidth, document.body.clientWidth)
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            if (document.body.clientWidth < 420) {
+              that.drawpie('difficultpie', '65%', '68%');
+            } else {
+              that.drawpie('difficultpie', '70%', '60%');
+            }
+            that.drawbar('difficultbar');
+          }, 100);
+        }
+      });     
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#difficultpie,
-#difficultbar {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  width: 800px;
-  height: 600px;
-  border: solid #faf6f3 2px;
-  box-shadow: 0 0 10px #F7D098;
-  border-radius: 10px;
-}  
-#difficultbar {
-  margin-top: 40px;
-  margin-bottom: 80px;
-}
-@media screen and (max-width: 1090px) {
   #difficultpie,
   #difficultbar {
-    position: absolute;
-    left: 415px;
-  }
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 600px;
+    margin-left: -45%;
+    border: solid #faf6f3 2px;
+    box-shadow: 0 0 10px #F7D098;
+    border-radius: 10px;
+  }  
   #difficultbar {
-    top: 604px;
+    margin-top: 30px;
   }
-}
+  @media screen and (max-width: 420px) {
+    #difficultpie {
+      height: 500px;
+    }
+  }
 </style>

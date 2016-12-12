@@ -1,25 +1,17 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="amuse"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
+  import echarts from 'echarts';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
         chart: null,
-        amuse: ['打游戏', '刷微博朋友圈', '看剧', '运动', '听歌', '看小说'],
-        amuseData: [
-          {value:26, name:'打游戏'},
-          {value:16, name:'刷微博朋友圈'},
-          {value:12, name:'看剧'},
-          {value:10, name:'运动'},
-          {value:2, name:'听歌'},
-          {value:2, name:'看小说'}
-        ],
         placeHolderStyle: {
           normal : {
             color: 'rgba(0,0,0,0)',
@@ -31,22 +23,12 @@
           }
         },
         color: ['#a2b4ba', '#85b6b2', '#6d4f8d', '#cd5e7e', '#e38980', '#f7db88']
-      }
+      };
     },
     methods: {
-      drawPie (id) {
-        this.chart = echarts.init(document.getElementById(id))
+      drawPie (id, radius0, radius1, radius2, radius3, radius4, radius5, radius6, centery) {
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
-          title: {
-            text: '周末休闲娱乐方式调查',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -63,14 +45,15 @@
               orient: 'vertical',
               left: 5,
               top: 10,
-              data: this.amuse,
+              data: data.amuse.amuse,
           },
           series: [
             {
-              name: '打游戏',
+              name: data.amuse.amuseData[0].name,
               type: 'pie',
               clockWise:false,
-              radius: [220, 240],
+              radius: [radius1, radius0],
+              center: ['50%', centery],
               itemStyle: {
                 normal: {
                   color: this.color[0],
@@ -82,7 +65,7 @@
               },
               hoverAnimation: false,
               data: [
-                this.amuseData[0],
+                data.amuse.amuseData[0],
                 {
                   value: 4,
                   name: 'invisible',
@@ -91,10 +74,11 @@
               ]
             },
             {
-              name: '刷微博朋友圈',
+              name: data.amuse.amuseData[1].name,
               type: 'pie',
               clockWise:false,
-              radius: [200, 220],
+              radius: [radius2, radius1],
+              center: ['50%', centery],
               itemStyle: {
                 normal: {
                   color: this.color[1],
@@ -106,7 +90,7 @@
               },
               hoverAnimation: false,
               data: [
-                this.amuseData[0],
+                data.amuse.amuseData[1],
                 {
                   value: 14,
                   name: 'invisible',
@@ -115,10 +99,11 @@
               ]
             },
             {
-              name: '看剧',
+              name: data.amuse.amuseData[2].name,
               type: 'pie',
               clockWise: false,
-              radius: [180, 200],
+              radius: [radius3, radius2],
+              center: ['50%', centery],
               itemStyle: {
                 normal: {
                   color: this.color[2],
@@ -130,7 +115,7 @@
               },
               hoverAnimation: false,
               data: [
-                this.amuseData[0],
+                data.amuse.amuseData[2],
                 {
                   value: 18,
                   name: 'invisible',
@@ -139,10 +124,11 @@
               ]
             },
             {
-              name: '运动',
+              name: data.amuse.amuseData[3].name,
               type: 'pie',
               clockWise:false,
-              radius: [160, 180],
+              radius: [radius4, radius3],
+              center: ['50%', centery],
               itemStyle: {
                 normal: {
                   color: this.color[3],
@@ -154,7 +140,7 @@
               },
               hoverAnimation: false,
               data: [
-                this.amuseData[0],
+                data.amuse.amuseData[3],
                 {
                   value: 20,
                   name: 'invisible',
@@ -163,10 +149,11 @@
               ]
             },
             {
-              name: '听歌',
+              name: data.amuse.amuseData[4].name,
               type: 'pie',
               clockWise:false,
-              radius: [140, 160],
+              radius: [radius5, radius4],
+              center: ['50%', centery],
               itemStyle: {
                 normal: {
                   color: this.color[4],
@@ -178,7 +165,7 @@
               },
               hoverAnimation: false,
               data: [
-                this.amuseData[0],
+                data.amuse.amuseData[4],
                 {
                   value: 28,
                   name: 'invisible',
@@ -187,10 +174,11 @@
               ]
             },
             {
-              name: '看小说',
+              name: data.amuse.amuseData[5].name,
               type: 'pie',
               clockWise:false,
-              radius: [120, 140],
+              radius: [radius6, radius5],
+              center: ['50%', centery],
               itemStyle: {
                 normal: {
                   color: this.color[5],
@@ -202,7 +190,7 @@
               },
               hoverAnimation: false,
               data: [
-                this.amuseData[0],
+                data.amuse.amuseData[5],
                 {
                   value: 28,
                   name: 'invisible',
@@ -211,37 +199,47 @@
               ]
             }
           ]
-        })
+        });
       }
     },
     mounted() {
       this.$nextTick(function() {
-        this.drawPie('amuse')
-      })
+        if (document.body.clientWidth < 530) {
+          this.drawPie('amuse', 140, 120, 100, 80, 60, 40, 20, '60%');
+        } else {
+          this.drawPie('amuse', 240, 220, 200, 180, 160, 140, 120, '55%');
+        }
+        
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            if (document.body.clientWidth < 530) {
+              that.drawPie('amuse', 140, 120, 100, 80, 60, 40, 20, '60%');
+            } else {
+              that.drawPie('amuse', 240, 220, 200, 180, 160, 140, 120, '55%');
+            }
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#amuse {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  margin-bottom: 70px;
-  width: 800px;
-  height: 660px;
-  box-shadow: 0 0 10px #a2b4ba;
-  border-radius: 10px;
-}   
-@media screen and (max-width: 1090px) {
   #amuse {
-    position: absolute;
-    left: 415px;
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 600px;
+    margin-left: -45%;
+    box-shadow: 0 0 10px #a2b4ba;
+    border-radius: 10px;
+  }   
+  @media screen and (max-width: 530px) {
+    #amuse {
+      height: 500px;
+    }
   }
-}
 </style>

@@ -1,34 +1,23 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="eat"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
+  import echarts from 'echarts';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
-        chart: null,
-        money: ['10元', '15元', '20元', '25元', '30元', '35元', '40元'],
-        number: [2, 11, 30, 30, 16, 2, 4]
-      }
+        chart: null
+      };
     },
     methods: {
       drawBar (id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
-          title: {
-            text: '每天在校吃饭花销',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'axis'
           },
@@ -51,7 +40,7 @@
           xAxis: [
             {
               type: 'category',
-              data: this.money
+              data: data.eat.money
             }
           ],
           yAxis: [
@@ -84,7 +73,7 @@
                   shadowBlur: 20
                 }
               },
-              data: this.number
+              data: data.eat.number
             }
           ]
         })
@@ -92,32 +81,28 @@
     },
     mounted() {
       this.$nextTick(function() {
-        this.drawBar('eat')
-      })
+        this.drawBar('eat');
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            that.drawBar('eat');
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#eat {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  margin-bottom: 70px;
-  width: 800px;
-  height: 600px;
-  box-shadow: 0 0 10px #726dd1;
-  border-radius: 10px;
-}   
-@media screen and (max-width: 1090px) {
   #eat {
-    position: absolute;
-    left: 415px;
-  }
-}
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 600px;
+    margin-left: -45%;
+    box-shadow: 0 0 10px #726dd1;
+    border-radius: 10px;
+  }   
 </style>

@@ -1,40 +1,24 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="graduate"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
-  import '../../node_modules/echarts/theme/roma.js'
+  import echarts from 'echarts';
+  import '../../node_modules/echarts/theme/roma.js';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
-        chart: null,
-        opinion: ['国内读研', '工作', '出国深造', '创业'],
-        opinionData: [
-          {value:58, name:'国内读研', selected: true},
-          {value:26, name:'工作'},
-          {value:10, name:'出国深造'},
-          {value:1, name:'创业'}
-        ]
-      }
+        chart: null
+      };
     },
     methods: {
       drawPie (id) {
-        this.chart = echarts.init(document.getElementById(id), 'roma')
+        this.chart = echarts.init(document.getElementById(id), 'roma');
         this.chart.setOption({
-          title: {
-            text: '毕业展望调查结果',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -51,7 +35,7 @@
               orient: 'vertical',
               left: 5,
               top: 10,
-              data: this.opinion,
+              data: data.graduate.opinion,
           },
           series: [
             {
@@ -60,7 +44,7 @@
               selectedMode: 'single',
               radius: '70%',
               center: ['50%', '60%'],
-              data: this.opinionData,
+              data: data.graduate.opinionData,
               itemStyle: {
                 normal: {
                   borderWidth: 0.5,
@@ -74,38 +58,39 @@
               }
             }
           ]
-        })
+        });
       }
     },
     mounted() {
       this.$nextTick(function() {
-        this.drawPie('graduate')
-      }) 
+        this.drawPie('graduate');
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            that.drawPie('graduate');
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#graduate {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  margin-bottom: 70px;
-  width: 800px;
-  height: 600px;
-  border: solid #E3670C 1px;
-  box-shadow: 0 0 8px #FBB448;
-  border-radius: 10px;
-}   
-@media screen and (max-width: 1090px) {
   #graduate {
-    position: absolute;
-    left: 415px;
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 600px;
+    margin-left: -45%;
+    border: solid #E3670C 1px;
+    box-shadow: 0 0 8px #FBB448;
+    border-radius: 10px;
+  }   
+  @media screen and (max-width: 470px) {
+    #graduate {
+      height: 500px;
+    }
   }
-}
 </style>

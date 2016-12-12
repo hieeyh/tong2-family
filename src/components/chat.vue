@@ -1,22 +1,22 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="relation"></div>
     <div id="activetime"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
-  import relations from 'static/data/similarityMatrix.json'
-  import speaks from 'static/data/dayVectors.json'
+  import echarts from 'echarts';
+  import relations from 'static/data/similarityMatrix.json';
+  import speaks from 'static/data/dayVectors.json';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
-        names: ['lxx', 'lx', 'pn', 'xrf', 'lxd', 'zrj', 'wsr', 'lcd', 'gt', 'zsx', 'wly', 'yyz', 'zn', 'zls', 'hrh', 'dp', 'yjw', 'ljh', 'ryh', 'zsh', 'mqd', 'prj', 'gyc', 'xzl', 'qy', 'zxz', 'hy', 'hb', 'zly'
-          ],
+        chart: null,
         times: ['00:00', '00:30', '01:00', '01:30', '02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30']
-      }
+      };
     },
     methods: {
       convertData (arr) {
@@ -26,7 +26,6 @@
             result[result.length] = [i,j,arr[i][j]];
           }
         }
-
         return result;
       },
       computeTotalSpeak (arr) {
@@ -49,21 +48,14 @@
         return result;
       },
       drawHeatMap(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
           title: {
-            text: '通信1502班同学关系密切度分析图（仅通过群聊数据分析）',
             subtext: '数值越大两者越亲密',
             subtextStyle: {
               fontSize: 16
             },
-            left: 'center',
-            top: 4,
-            textStyle: {
-              fontSize: 22,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
+            left: 'center'
           },
           tooltip: {
             trigger: 'item'
@@ -82,7 +74,7 @@
           },
           xAxis: {
             type: 'category',
-            data: this.names,
+            data: data.chat.names,
             axisLabel: {
               rotate: 60,
               interval: 0
@@ -93,7 +85,7 @@
           },
           yAxis: {
             type: 'category',
-            data: this.names,
+            data: data.chat.names,
             splitArea: {
               show: true
             }  
@@ -125,21 +117,11 @@
               }
             }
           ]
-        })
+        });
       },
       drawLine(id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
-          title: {
-            text: '通信1502班班群平均每天不同时间段发言量分析',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 22,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'axis'
           },
@@ -216,50 +198,40 @@
               }]
             }
           }
-        })
+        });
       }
     },
     mounted() {
-      // console.log(this.computeTotalSpeak(speaks))
-      // console.log(speaks)
-      // console.log(this.convertData(relations))
       this.$nextTick(function() {
-        this.drawHeatMap('relation')
-        this.drawLine('activetime')
-      })
+        this.drawHeatMap('relation');
+        this.drawLine('activetime');
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            that.drawHeatMap('relation')
+            that.drawLine('activetime');
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#relation,
-#activetime {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  width: 800px;
-  height: 900px;
-  box-shadow: 0 0 10px #EDE68A;
-  border-radius: 10px;
-} 
-#activetime {
-  height: 600px;
-  margin-top: 30px;
-  margin-bottom: 70px;
-}
-@media screen and (max-width: 1090px) {
   #relation,
   #activetime {
-    position: absolute;
-    left: 415px;
-  }
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 900px;
+    margin-left: -45%;
+    box-shadow: 0 0 10px #EDE68A;
+    border-radius: 10px;
+  } 
   #activetime {
-    top: 900px;
+    height: 600px;
+    margin-top: 30px;
   }
-}
 </style>

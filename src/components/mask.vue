@@ -5,21 +5,21 @@
 <script>
     export default {
       mounted() {
-        this.$el.style.height = document.body.scrollHeight + 'px'
+        this.$el.style.height = document.body.scrollHeight + 'px';
       }
     }
 </script>
 
 <style scoped>
-#mask {
-  background-color: #ccc;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: 100;
-}
+  #mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    z-index: 100;
+  }
 </style>

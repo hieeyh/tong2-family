@@ -1,58 +1,37 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="selfstudy"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
-  import '../../node_modules/echarts/dist/extension/bmap.min.js'
+  import echarts from 'echarts';
+  import '../../node_modules/echarts/dist/extension/bmap.min.js';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
-        chart: null,
-        studyContent: [
-          {name: '西五', value: 3},
-          {name: '图书馆', value: 14},
-          {name: '东十二', value: 35},
-          {name: '东九', value: 43}
-        ],
-        geoCoordMap: {
-          '西五':[114.416517,30.51651],
-          '图书馆':[114.418508,30.518443],
-          '东十二':[114.440574,30.517961],
-          '东九':[114.433451,30.519458]  
-        }
-      }
+        chart: null
+      };
     },
     methods: {
-      convertData (data) {
-        let res = []
-        for (let i = 0; i < data.length; i++) {
-          let geoCoord = this.geoCoordMap[data[i].name]
+      convertData (oldData) {
+        let res = [];
+        for (let i = 0; i < oldData.length; i++) {
+          let geoCoord = data.selfstudy.geoCoordMap[oldData[i].name];
           if (geoCoord) {
             res.push({
-              name: data[i].name,
-              value: geoCoord.concat(data[i].value)
+              name: oldData[i].name,
+              value: geoCoord.concat(oldData[i].value)
             });
           }
         }
-          return res
+        return res;
       },
       drawMap (id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
-          title: {
-            text: '学生最常自习地点分布',
-            left: 'center',
-            top: 15,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'item'
           },
@@ -77,7 +56,7 @@
               name: '自习地点',
               type: 'scatter',
               coordinateSystem: 'bmap',
-              data: this.convertData(this.studyContent),
+              data: this.convertData(data.selfstudy.studyContent),
               symbolSize: function (val) {
                 return (val[2] + 2) * 2;
               },
@@ -101,7 +80,7 @@
               name: 'Top 5',
               type: 'effectScatter',
               coordinateSystem: 'bmap',
-              data: this.convertData(this.studyContent.sort(function (a, b) {
+              data: this.convertData(data.selfstudy.studyContent.sort(function (a, b) {
                 return b.value - a.value;
               }).slice(0, 2)),
               symbolSize: function (val) {
@@ -129,37 +108,33 @@
               zlevel: 1
             }
           ]
-        })
+        });
       }
     },
     mounted() {
       this.$nextTick(function() {
-        this.drawMap('selfstudy')
-      })
+        this.drawMap('selfstudy');
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            that.drawMap('selfstudy');
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#selfstudy {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  margin-bottom: 70px;
-  width: 800px;
-  height: 600px;
-  box-shadow: 0 0 10px #D15385;
-  border-radius: 10px;
-} 
-@media screen and (max-width: 1090px) {
   #selfstudy {
-    position: absolute;
-    left: 415px;
-  }
-}  
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 600px;
+    margin-left: -45%;
+    box-shadow: 0 0 10px #D15385;
+    border-radius: 10px;
+  } 
 </style>

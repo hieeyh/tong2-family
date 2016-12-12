@@ -26,7 +26,6 @@ module.exports = {
       // 使用独立构建而不是运行时构建
       'vue$': 'vue/dist/vue',  
       'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
       'static': path.resolve(__dirname, '../static')
     }

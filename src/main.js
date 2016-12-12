@@ -1,26 +1,26 @@
-import Vue from 'vue'
-import App from './App'
-import VueRouter from 'vue-router'
-import store from './store/store'
-// import Vuex from 'vuex'
-Vue.use(VueRouter) 
-// Vue.use(Vuex)
+import Vue from 'vue';
+import App from './App';
+import VueRouter from 'vue-router';
+import store from './store/store';
+
+Vue.use(VueRouter);
+
 // 定义路由组件
-const Worldcloud = require('./components/cloud.vue')
-const Building = require('./components/building.vue')
-const Canteen = require('./components/canteen.vue')
-const Selfstudy = require('./components/selfstudy.vue')
-const Difficult = require('./components/difficult.vue')
-const Interest = require('./components/interest.vue')
-const Bedroom = require('./components/bedroom.vue')
-const Graduate = require('./components/graduate.vue')
-const Getup = require('./components/getup.vue')
-const Gotobed = require('./components/gotobed.vue')
-const Eat = require('./components/eat.vue')
-const Amuse = require('./components/amuse.vue')
-const Single = require('./components/single.vue')
-const Chat = require('./components/chat.vue')
-const Onlyme = require('./components/onlyme.vue')
+const Worldcloud = require('components/cloud.vue');
+const Building = require('components/building.vue');
+const Canteen = require('components/canteen.vue');
+const Selfstudy = require('components/selfstudy.vue');
+const Difficult = require('components/difficult.vue');
+const Interest = require('components/interest.vue');
+const Bedroom = require('components/bedroom.vue');
+const Graduate = require('components/graduate.vue');
+const Getup = require('components/getup.vue');
+const Gotobed = require('components/gotobed.vue');
+const Eat = require('components/eat.vue');
+const Amuse = require('components/amuse.vue');
+const Single = require('components/single.vue');
+const Chat = require('components/chat.vue');
+const Onlyme = require('components/onlyme.vue');
 
 // 定义路由
 const routes = [
@@ -40,12 +40,12 @@ const routes = [
   { path: '/single', component: Single },
   { path: '/chat', component: Chat },
   { path: '/onlyme', component: Onlyme }
-]
+];
 
 // 创建router实例
 const router = new VueRouter({
   routes
-})
+});
 
 // const store = new Vuex.Store({
 //   state: {
@@ -68,7 +68,7 @@ new Vue({
   components: { App },
   router,
   store
-})
+});
 
 
 

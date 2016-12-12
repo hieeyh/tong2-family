@@ -1,38 +1,23 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="bedroom"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
+  import echarts from 'echarts';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
-        chart: null,
-        opinion: ['学习氛围差', '学习氛围一般', '学习氛围很好'],
-        opinionData: [
-          {value:26, name:'学习氛围差'},
-          {value:31, name:'学习氛围一般'},
-          {value:8, name:'学习氛围很好'}
-        ]
-      }
+        chart: null
+      };
     },
     methods: {
       drawPie (id) {
-        this.chart = echarts.init(document.getElementById(id))
+        this.chart = echarts.init(document.getElementById(id));
         this.chart.setOption({
-          title: {
-            text: '寝室学习氛围情况调查',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'item',
             formatte: "{b}: {c} ({d}%)"
@@ -49,7 +34,7 @@
               orient: 'vertical',
               left: 5,
               top: 10,
-              data: this.opinion,
+              data: data.bedroom.opinion,
           },
           series: [
             {
@@ -72,7 +57,7 @@
                   show: false
                 }
               },
-              data: this.opinionData,
+              data: data.bedroom.opinionData,
               itemStyle: {
                 emphasis: {
                   shadowBlur: 10,
@@ -82,38 +67,39 @@
               }
             }
           ]
-        })
+        });
       }
     },
     mounted() {
       this.$nextTick(function() {
-        this.drawPie('bedroom')
-      })
+        this.drawPie('bedroom');
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            that.drawPie('bedroom');
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#bedroom {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  margin-bottom: 70px;
-  width: 800px;
-  height: 600px;
-  border: solid #D01257 1px;
-  box-shadow: 0 0 8px #FB90B7;
-  border-radius: 10px;
-}   
-@media screen and (max-width: 1090px) {
   #bedroom {
-    position: absolute;
-    left: 415px;
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 600px;
+    margin-left: -45%;
+    border: solid #D01257 1px;
+    box-shadow: 0 0 8px #FB90B7;
+    border-radius: 10px;
+  }   
+  @media screen and (max-width: 470px) {
+    #bedroom {
+      height: 500px;
+    }
   }
-}
 </style>

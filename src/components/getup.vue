@@ -1,45 +1,25 @@
 <template>
-  <div class="main_content">
+  <div>
     <div id="getupbar"></div>
     <div id="getuppie"></div>
   </div>
 </template>
 
 <script>
-  import echarts from 'echarts'
-  import '../../node_modules/echarts/theme/vintage.js'
+  import echarts from 'echarts';
+  import '../../node_modules/echarts/theme/vintage.js';
+  import data from 'static/data/data.json';
 
   export default {
     data() {
       return {
-        chart: null,
-        time: ['6点', '6点半', '7点', '7点15', '7点半', '8点', '8点半及以后'],
-        number: [2, 5, 18, 11, 17, 1, 3],
-        numberData: [
-          {value:2, name:'6点'},
-          {value:5, name:'6点半'},
-          {value:18, name:'7点'},
-          {value:11, name:'7点15'},
-          {value:17, name:'7点半'},
-          {value:1, name:'8点'},
-          {value:3, name:'8点半及以后'}
-        ],
-      }
+        chart: null
+      };
     },
     methods: {
       drawbar(id) {
-        this.chart = echarts.init(document.getElementById(id), 'vintage')
+        this.chart = echarts.init(document.getElementById(id), 'vintage');
         this.chart.setOption({
-          title: {
-            text: '工作日起床时间调查结果',
-            left: 'center',
-            top: 10,
-            textStyle: {
-              fontSize: 24,
-              fontFamily: 'Helvetica',
-              fontWeight: 400
-            }
-          },
           tooltip: {
             trigger: 'axis'
           },
@@ -64,7 +44,7 @@
             {
               type: 'category',
               boundrayGap: false,
-              data: this.time
+              data: data.getup.time
             }
           ],
           yAxis: [
@@ -90,13 +70,13 @@
                   {type: 'min', name: '最小值'}
                 ]
               },
-              data: this.number
+              data: data.getup.number
             }
           ]
-        })
+        });
       },
-      drawpie(id) {
-        this.chart = echarts.init(document.getElementById(id), 'vintage')
+      drawpie(id, centery) {
+        this.chart = echarts.init(document.getElementById(id), 'vintage');
         this.chart.setOption({
           tooltip: {
             trigger: 'item',
@@ -114,15 +94,15 @@
             orient: 'vertical',
             left: 5,
             top: 10,
-            data: this.time,
+            data: data.getup.time,
           },
           series: [
             {
               name: '人数',
               type: 'pie',
               radius: '70%',
-              center: ['50%', '60%'],
-              data: this.numberData,
+              center: ['50%', centery],
+              data: data.getup.numberData,
               itemStyle: {
                 emphasis: {
                   shadowBlur: 10,
@@ -132,46 +112,53 @@
               }
             }
           ]
-        })
+        });
       }
     },
     mounted() {
       this.$nextTick(function() {
-        this.drawbar('getupbar')
-        this.drawpie('getuppie')
-      })
+        this.drawbar('getupbar');
+        if (document.body.clientWidth < 470) {
+          this.drawpie('getuppie', '70%');
+        } else {
+          this.drawpie('getuppie', '60%');
+        }
+        
+        var that = this;
+        var resizeTimer = null;
+        window.onresize = function() {
+          if (resizeTimer) clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function() {
+            that.drawbar('getupbar');
+            if (document.body.clientWidth < 470) {
+              that.drawpie('getuppie', '70%');
+            } else {
+              that.drawpie('getuppie', '60%');
+            }
+          }, 100);
+        }
+      });
     }
   }
 </script>
 
 <style scoped>
-.main_content {
-  position: relative;
-  margin-left: 245px;
-  margin-top: 100px;
-}
-#getupbar,
-#getuppie {
-  position: relative;
-  left: 50%;
-  margin-left: -400px;
-  width: 800px;
-  height: 600px;
-  box-shadow: 0 0 10px #BF382A;
-  border-radius: 10px;
-}  
-#getuppie {
-  margin-top: 60px;
-  margin-bottom: 70px;
-}
-@media screen and (max-width: 1090px) {
   #getupbar,
   #getuppie {
-    position: absolute;
-    left: 415px;
-  }
+    position: relative;
+    left: 50%;
+    width: 90%;
+    height: 600px;
+    margin-left: -45%;
+    box-shadow: 0 0 10px #BF382A;
+    border-radius: 10px;
+  }  
   #getuppie {
-    top: 600px;
+    margin-top: 30px;
   }
-}
+  @media screen and (max-width: 470px) {
+    #getuppie {
+      height: 500px;
+    }
+  }
 </style>

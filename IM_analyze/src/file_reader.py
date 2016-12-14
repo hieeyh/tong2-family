@@ -1,4 +1,9 @@
 ﻿#coding=utf-8
+'''
+Created on 2016.10.14
+
+@author: xiaoq, houge
+'''
 import re
 import datetime, time
 
